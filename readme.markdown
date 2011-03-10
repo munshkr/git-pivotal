@@ -7,9 +7,9 @@ You might want to have [this song](http://www.dailymotion.com/video/x9vzh0_olivi
 Inspired by [Hashrocket's blend of git and Pivotal Tracker](http://reinh.com/blog/2009/03/02/a-git-workflow-for-agile-teams.html) and [a popular article on effective git workflows](http://nvie.com/archives/323), I set off to create a set of utilities to simplify the workflow between the two.
 
 ###Git Feature/Bug/Chore
-The Git Pivotal utility provides three tools to integrate with your Pivotal Tracker project -- `git feature`, `git bug` and `git chore`.  These commands collect the top-most available feature, bug or chore (respectively) from your Pivotal Tracker and creates a unique feature branch for it.
+The Git Pivotal utility provides three tools to integrate with your Pivotal Tracker project -- `git pivotal feature`, `git pivotal bug` and `git pivotal chore`.  These commands collect the top-most available feature, bug or chore (respectively) from your Pivotal Tracker and creates a unique feature branch for it.
 
-    1 git-pivotal:master % git feature
+    1 git-pivotal:master % git pivotal feature
     Collecting latest stories from Pivotal Tracker...
     Story: Test git pivotal
     URL:   http://www.pivotaltracker.com/story/show/1234567
@@ -21,7 +21,7 @@ The Git Pivotal utility provides three tools to integrate with your Pivotal Trac
 ###Git Finish
 When on a feature branch, this command will close the associated story in Pivotal Tracker, merge the branch into your integration branch (`master` by default) and remove the feature branch.
 
-    3 git-pivotal:1234567-testing % git finish
+    3 git-pivotal:1234567-testing % git pivotal finish
     Marking Story 1234567 as finished...
     Merging 1234567-testing into master
     Removing 1234567-testing branch
