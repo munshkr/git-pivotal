@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
-subcommand = ARGV.shift
-
-if subcommand.nil?
+def print_usage
   puts "Usage: git pivotal <subcommand>"
   puts
   puts "Available subcommands are:"
@@ -14,11 +10,26 @@ if subcommand.nil?
   puts "   finish    Close associated story, merge branch into integration branch,"
   puts "             and delete feature branch."
   puts
+end
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
+subcommand = ARGV.shift
+
+if subcommand.nil?
+  print_usage
   exit 1
 end
 
 require "pivotal"
-require "commands/#{subcommand}"
+
+begin
+  require "commands/#{subcommand}"
+rescue LoadError
+  puts "Unknown subcommand: '#{subcommand}'"
+  print_usage
+  exit 1
+end
 
 subcommand_cls = Commands.const_get(subcommand.capitalize)
 exit subcommand_cls.new(STDIN, STDOUT, *ARGV).run!
